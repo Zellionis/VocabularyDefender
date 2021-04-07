@@ -1,22 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Script
 {
     public class Word
     {
-        private string english;
-        private string french;
+        private string baseWord;
+        private string[] tradList;
 
-        public Word(string _english, string _french)
+        public Word(string[] _list)
         {
-            english = _english;
-            french = _french;
+            baseWord = _list[0];
+            tradList = _list.Skip(1).ToArray();
         }
 
-        public string English => english;
-        public string French => french;
+        public bool IsTraduction(string _word)
+        {
+            foreach (var trad in tradList)
+            {
+                if (trad.Trim().Equals(_word))
+                    return true;
+            }
+
+            return false;
+        }
+        
+        public string BaseWord => baseWord;
     }
     public class Words
     {
@@ -32,7 +43,7 @@ namespace Script
                     continue;
                 
                 string[] wordCorrespondanceSplited = wordCorrespondance.Split(';');
-                wordList.Add(new Word(wordCorrespondanceSplited[0], wordCorrespondanceSplited[1]));
+                wordList.Add(new Word(wordCorrespondanceSplited));
             }
         }
 

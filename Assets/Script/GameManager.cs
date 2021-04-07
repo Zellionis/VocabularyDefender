@@ -26,10 +26,10 @@ public class GameManager : MonoBehaviour
         lastWord = words.GetRandomWord();
         currentWord = words.GetRandomWord();
         
-        textDisplayer.NextWord(currentWord.English);
-        textDisplayer.NextWord(lastWord.English);
-        textDisplayer.NextWord(secondWord.English);
-        textDisplayer.NextWord(thirdWord.English);
+        textDisplayer.NextWord(currentWord.BaseWord);
+        textDisplayer.NextWord(lastWord.BaseWord);
+        textDisplayer.NextWord(secondWord.BaseWord);
+        textDisplayer.NextWord(thirdWord.BaseWord);
         
         inputField.Select();
     }
@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
         //currentWordDisplay.SetText(currentWord.English);
         if (Input.GetButtonDown("Submit"))
         {
-            if (currentWord.French.Trim().Equals(inputField.text.Trim()))
+            if (currentWord.IsTraduction(inputField.text.Trim()))
             {
                 Debug.Log("True !");
             }
@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
             secondWord = thirdWord;
             thirdWord = words.GetRandomWord();
             
-            textDisplayer.NextWord(thirdWord.English);
+            textDisplayer.NextWord(thirdWord.BaseWord);
             
             inputField.text = "";
         }
