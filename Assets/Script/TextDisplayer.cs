@@ -1,17 +1,18 @@
-﻿using System.Collections;
+﻿using TMPro;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class TextDisplayer : MonoBehaviour
 {
-    List<Text>     words    = new List<Text>();
+    List<TMP_Text>     words    = new List<TMP_Text>();
     List<Vector2>  wordsPos = new List<Vector2>();
 
     // Start is called before the first frame update
     void Start()
     {
-        foreach (Text T in GetComponentsInChildren<Text>())
+        foreach (TMP_Text T in GetComponentsInChildren<TMP_Text>())
         {
             words.Add(T);
             wordsPos.Add(T.rectTransform.position);
@@ -21,9 +22,6 @@ public class TextDisplayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.N))
-            NextWord("OGBWOin");
-
         for (int i = 0; i < 4; i++)
         {
             if (!words[i].rectTransform.position.Equals(wordsPos[i]))
@@ -41,7 +39,7 @@ public class TextDisplayer : MonoBehaviour
         }
     }
 
-    void NextWord(string newWord)
+    public void NextWord(string newWord)
     {
         words[3].rectTransform.position = words[2].rectTransform.position;
         words[3].text                   = words[2].text;
