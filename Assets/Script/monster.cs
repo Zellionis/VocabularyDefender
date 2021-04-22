@@ -9,6 +9,11 @@ public class monster : MonoBehaviour
     public int Hp;
     public float speed;
     public float target;
+    [SerializeField]
+    float scoreDrop = 20.0f;
+    
+    [SerializeField]
+    float pieceDrop = 1.0f;
 
     void Start()
     {
@@ -31,4 +36,6 @@ public class monster : MonoBehaviour
         if(Hp <= 0)
             Destroy(this.gameObject);
     }
+    
+    
 }
