@@ -24,13 +24,13 @@ public class Player : MonoBehaviour
         
     }
 
-    public void Fire(GameObject _monster)
+    public void Fire(List<GameObject> _monsterList)
     {
         GameObject temp = null;
         
         temp = GameObject.Instantiate(fireball,cristal1.transform.parent);
         temp.transform.position = cristal1.transform.position;
-        temp.GetComponent<Fireball>().target = _monster;
+        temp.GetComponent<Fireball>().targetList = _monsterList;
         
         /*temp = GameObject.Instantiate(fireball,cristal2.transform.parent);
         temp.transform.position = cristal2.transform.position;

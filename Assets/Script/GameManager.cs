@@ -43,18 +43,26 @@ public class GameManager : MonoBehaviour
     {
         if (!inputField.isFocused)
             inputField.Select();
-        
+
+        if (monsterManager.Mobs.Count > 0)
+        {
+            if (monsterManager.Mobs[0] == null)
+            {
+                monsterManager.Mobs.RemoveAt(0);
+            }
+        }
+
         if (Input.GetButtonDown("Submit") && monsterManager.Mobs.Count > 0)
         {
             if (currentWord.IsTraduction(inputField.text.Trim()))
             {
                 Debug.Log("True !");
-                player.Fire(monsterManager.Mobs[0]);
+                player.Fire(monsterManager.Mobs);
             }
             else
             {
                 Debug.Log("False !");
-                player.Fire(monsterManager.Mobs[0]);
+                player.Fire(monsterManager.Mobs);
             }
             
             currentWord = lastWord;

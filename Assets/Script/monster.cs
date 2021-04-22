@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,11 +24,11 @@ public class monster : MonoBehaviour
       }  
     }
 
-    void Damage(int _damage)
+    public void Damage(int _damage)
     {
         Hp -= _damage;
         
         if(Hp <= 0)
-            Destroy(this);
+            Destroy(this.gameObject);
     }
 }
