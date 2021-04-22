@@ -8,6 +8,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextAsset wordsFile = null;
     [SerializeField] private TMP_InputField inputField = null;
     [SerializeField] private TextDisplayer textDisplayer = null;
+    
+    [SerializeField] private Player player = null;
+    [SerializeField] private MonsterManager monsterManager = null;
+
 
     private Words words = null; // Store list of word
     
@@ -39,17 +43,18 @@ public class GameManager : MonoBehaviour
     {
         if (!inputField.isFocused)
             inputField.Select();
-
-        //currentWordDisplay.SetText(currentWord.English);
-        if (Input.GetButtonDown("Submit"))
+        
+        if (Input.GetButtonDown("Submit") && monsterManager.Mobs.Count > 0)
         {
             if (currentWord.IsTraduction(inputField.text.Trim()))
             {
                 Debug.Log("True !");
+                player.Fire(monsterManager.Mobs[0]);
             }
             else
             {
                 Debug.Log("False !");
+                player.Fire(monsterManager.Mobs[0]);
             }
             
             currentWord = lastWord;

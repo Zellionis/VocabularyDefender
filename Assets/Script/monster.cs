@@ -22,4 +22,12 @@ public class monster : MonoBehaviour
             transform.position = new Vector3(transform.position.x - speed * Time.deltaTime, transform.position.y, transform.position.z);
       }  
     }
+
+    void Damage(int _damage)
+    {
+        Hp -= _damage;
+        
+        if(Hp <= 0)
+            Destroy(this);
+    }
 }

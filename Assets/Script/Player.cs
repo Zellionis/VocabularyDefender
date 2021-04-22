@@ -1,13 +1,18 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] private GameObject fireball = null;
+    [SerializeField] private GameObject cristal1 = null;
+    [SerializeField] private GameObject cristal2 = null;
+    
     public int Hp;
     public int Score;
     public int Solid;
+
     void Start()
     {
         
@@ -17,5 +22,20 @@ public class Player : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void Fire(GameObject _monster)
+    {
+        GameObject temp = null;
+        
+        temp = GameObject.Instantiate(fireball,cristal1.transform.parent);
+        temp.transform.position = cristal1.transform.position;
+        temp.GetComponent<Fireball>().target = _monster;
+        
+        /*temp = GameObject.Instantiate(fireball,cristal2.transform.parent);
+        temp.transform.position = cristal2.transform.position;
+        temp.GetComponent<Fireball>().target = _monster;*/
+
+
     }
 }
