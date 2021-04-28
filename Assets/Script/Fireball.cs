@@ -26,6 +26,12 @@ public class Fireball : MonoBehaviour
                 break;
             }
         }
+
+        if (target == null)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
         
         transform.position = Vector2.MoveTowards(transform.position, target.transform.position,0.02f * speed * Time.deltaTime);
         Vector3 vectorToTarget = target.transform.position - transform.position;

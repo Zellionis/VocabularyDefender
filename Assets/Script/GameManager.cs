@@ -58,11 +58,16 @@ public class GameManager : MonoBehaviour
             {
                 Debug.Log("True !");
                 player.Fire(monsterManager.Mobs);
+                player.combo = player.combo == 3 ? 3 : player.combo+1;
             }
             else
             {
                 Debug.Log("False !");
+                //player.combo = player.combo == 0 ? 0 : player.combo-1;
+                //TODO:Remove before build
                 player.Fire(monsterManager.Mobs);
+                player.combo = player.combo == 3 ? 3 : player.combo+1;
+
             }
             
             currentWord = lastWord;
