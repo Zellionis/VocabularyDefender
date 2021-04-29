@@ -3726,6 +3726,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: {fileID: 1100913898}
+  wrongWordList: {fileID: 1270092572}
   pausePanel: {fileID: 1052144395}
   gameOverPanel: {fileID: 697433892}
 --- !u!1 &973871423

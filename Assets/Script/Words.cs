@@ -28,6 +28,7 @@ namespace Script
         }
         
         public string BaseWord => baseWord;
+        public string MainTrad => tradList[0];
     }
     public class Words
     {
