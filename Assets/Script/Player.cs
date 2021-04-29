@@ -68,7 +68,7 @@ public class Player : MonoBehaviour
         if (!other.tag.Equals("Enemy"))
             return;
         
-        Damage(1);
+        Damage(other.GetComponent<monster>().Hp*2);
         Destroy(other.gameObject);
     }
 }

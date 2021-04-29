@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class monster : MonoBehaviour
@@ -9,7 +10,10 @@ public class monster : MonoBehaviour
     public int Hp;
     public float speed;
     public float target;
+    public float timeToNextSpawn = 2;
+    public bool IsDead = false;
     [SerializeField] int scoreDrop = 20;
+    private float timeDespawn = 2;
 
     void Start()
     {
@@ -22,7 +26,15 @@ public class monster : MonoBehaviour
       if(target < transform.position.x)
       {
             transform.position = new Vector3(transform.position.x - speed * Time.deltaTime, transform.position.y, transform.position.z);
-      }  
+      }
+
+      if (IsDead)
+      {
+          timeDespawn -= Time.deltaTime;
+          if(timeDespawn <= 0)
+              Destroy(this.gameObject);
+
+      }
     }
 
     public void Damage(int _damage)
@@ -32,7 +44,10 @@ public class monster : MonoBehaviour
         if (Hp <= 0)
         {
             Player.Score += scoreDrop;
-            Destroy(this.gameObject);
+            IsDead = true;
+            speed = 0;
+            GetComponent<Animator>().SetBool("dead",true);
+            GetComponent<CircleCollider2D>().enabled = false;
         }
     }
     

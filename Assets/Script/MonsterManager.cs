@@ -14,8 +14,10 @@ public class MonsterManager : MonoBehaviour
     public float TimeSpawn;
     int CurrentN = 0;
     float CurrTime = 0;
+    private float SpeedAdd = 0;
     void Start()
     {
+        Wave = 1;
         CurrTime = TimeSpawn;
         CurrentN = NumberWords;
     }
@@ -27,27 +29,41 @@ public class MonsterManager : MonoBehaviour
 
         if(CurrentN - Prefabs[ran].GetComponent<monster>().Hp < 0)
         {
-            ran = 0;
+            while(CurrentN - Prefabs[ran].GetComponent<monster>().Hp < 0)
+            {
+                ran--;
+            }
         }
 
         if (CurrTime <= 0 && CurrentN > 0)
         {
             CurrentN -= Prefabs[ran].GetComponent<monster>().Hp;
-            Mobs.Add(spawns[Random.Range(0, 3)].spawn(Prefabs[ran]));
+            int SpawnRan = Random.Range(0, 3);
+            Mobs.Add(spawns[SpawnRan].spawn(Prefabs[ran], ran));
+            Mobs[Mobs.Count - 1].GetComponent<SpriteRenderer>().sortingOrder = SpawnRan + 1;
+            Mobs[Mobs.Count-1].GetComponent<monster>().speed += SpeedAdd;
+            CurrTime = Mobs[Mobs.Count-1].GetComponent<monster>().timeToNextSpawn;
+        }
+
+        if (CurrentN == 0)
+        {
+            if (Wave < 4)
+                NumberWords += 10;
             
-            CurrTime = TimeSpawn;
+            else if (Wave < 6)
+                SpeedAdd += 0.25f;
+            
+            else if (Wave < 8)
+                NumberWords += 10;
+            
+            else
+                SpeedAdd += 0.25f;
+
+            CurrentN = NumberWords;
+            Wave++;
         }
 
         CurrTime -= Time.deltaTime;
     }
-
-    public void NextWave()
-    {
-        Wave++;
-        foreach (GameObject Mob in Mobs)
-        {
-            Destroy(Mob);
-        }
-        Mobs.Clear();
-    }
+    
 }

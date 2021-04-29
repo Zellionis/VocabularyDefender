@@ -20,7 +20,7 @@ public class Fireball : MonoBehaviour
     {
         foreach (var _target in targetList)
         {
-            if (_target != null)
+            if (!_target.GetComponent<monster>().IsDead)
             {
                 target = _target;
                 break;

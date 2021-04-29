@@ -18,14 +18,17 @@ public class Spawner : MonoBehaviour
     {
     }
 
-    public GameObject spawn(GameObject _mob)
+    public GameObject spawn(GameObject _mob, int index)
     {
         GameObject mob = Object.Instantiate<GameObject>(_mob);
         if (mob.GetComponent<monster>())
             mob.GetComponent<monster>().target = Target;
 
-        mob.transform.position = transform.position;
-
+        if (index < 4)
+            mob.transform.position = transform.position;
+        else
+            mob.transform.position = new Vector3(transform.position.x, transform.position.y + 1.0f);
+        
         return mob;
     }
 }
