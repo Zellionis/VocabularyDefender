@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     
     [SerializeField] private Player player = null;
     [SerializeField] private MonsterManager monsterManager = null;
+    [SerializeField] private PanelManager panelManager = null;
 
 
     private Words words = null; // Store list of word
@@ -19,6 +20,9 @@ public class GameManager : MonoBehaviour
     private Word secondWord = null;
     private Word lastWord = null;
     private Word currentWord = null; // Store current word
+
+    private bool pause = false;
+    private bool loose = false;
     
     // Start is called before the first frame update
     void Start()
@@ -36,11 +40,40 @@ public class GameManager : MonoBehaviour
         textDisplayer.NextWord(thirdWord.BaseWord);
         
         inputField.Select();
+        
+        Time.timeScale = 1;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (player.Hp <= 0)
+        {
+            Time.timeScale = 0;
+            loose = true;
+            panelManager.SetGameOver();
+            panelManager.SetPause(false);
+        }
+        
+        if(loose)
+            return;
+        
+        if (Input.GetButtonDown("Pause") && !pause)
+        {
+            Time.timeScale = 0;
+            pause = true;
+            panelManager.SetPause(true);
+        }
+        else if(Input.GetButtonDown("Pause"))
+        {
+            Time.timeScale = 1;
+            pause = false;
+            panelManager.SetPause(false);
+        }
+
+        if(pause)
+            return;
+        
         if (!inputField.isFocused)
             inputField.Select();
 
@@ -58,15 +91,15 @@ public class GameManager : MonoBehaviour
             {
                 Debug.Log("True !");
                 player.Fire(monsterManager.Mobs);
-                player.combo = player.combo == 3 ? 3 : player.combo+1;
+                player.combo += 1;
             }
             else
             {
                 Debug.Log("False !");
-                //player.combo = player.combo == 0 ? 0 : player.combo-1;
+                //player.combo = 0;
                 //TODO:Remove before build
                 player.Fire(monsterManager.Mobs);
-                player.combo = player.combo == 3 ? 3 : player.combo+1;
+                player.combo += 1;
 
             }
             
