@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using Script;
 using TMPro;
 using UnityEngine;
@@ -13,7 +13,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private MonsterManager monsterManager = null;
     [SerializeField] private PanelManager panelManager = null;
 
-
+    private List<Word> wrongWords = new List<Word>();
+    
     private Words words = null; // Store list of word
     
     private Word thirdWord = null;
@@ -47,17 +48,17 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(loose)
+            return;
+        
         if (player.Hp <= 0)
         {
             Time.timeScale = 0;
             loose = true;
-            panelManager.SetGameOver();
+            panelManager.SetGameOver(wrongWords);
             panelManager.SetPause(false);
         }
-        
-        if(loose)
-            return;
-        
+
         if (Input.GetButtonDown("Pause") && !pause)
         {
             Time.timeScale = 0;
@@ -96,11 +97,8 @@ public class GameManager : MonoBehaviour
             else
             {
                 Debug.Log("False !");
-                //player.combo = 0;
-                //TODO:Remove before build
-                player.Fire(monsterManager.Mobs);
-                player.combo += 1;
-
+                wrongWords.Add(currentWord);
+                player.combo = 0;
             }
             
             currentWord = lastWord;
