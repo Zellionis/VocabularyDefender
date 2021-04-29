@@ -6426,6 +6426,11 @@ MonoBehaviour:
   Prefabs:
   - {fileID: 6213319509910401847, guid: c7a13eb0e8b51ff4eb308effd325a3de, type: 3}
   - {fileID: 2360384183576696221, guid: c28cc0e5636e14a40806733a69ba8652, type: 3}
+  - {fileID: 8808630545902501781, guid: 8c4af182dff64914a928f84ea88cf995, type: 3}
+  - {fileID: 2694477399006504260, guid: 1766cb19bf3fee440bc425e22aa8028f, type: 3}
+  - {fileID: 4571368881007924298, guid: 582317499c3e6f042b272fbb89fac7ab, type: 3}
+  - {fileID: 3841198923721162330, guid: 6850b9881482e8549b8a8d1545cbb274, type: 3}
+  - {fileID: 8802357434453934296, guid: 4858dae59784cd84397f5d75d5a1937d, type: 3}
   Mobs: []
   Wave: 0
   NumberWords: 10

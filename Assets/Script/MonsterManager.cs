@@ -40,7 +40,7 @@ public class MonsterManager : MonoBehaviour
             CurrentN -= Prefabs[ran].GetComponent<monster>().Hp;
             int SpawnRan = Random.Range(0, 3);
             Mobs.Add(spawns[SpawnRan].spawn(Prefabs[ran], ran));
-            Mobs[Mobs.Count - 1].GetComponent<SpriteRenderer>().sortingOrder = SpawnRan + 1;
+            Mobs[Mobs.Count - 1].GetComponent<SpriteRenderer>().sortingOrder = SpawnRan + (ran > 3 ? 2:1);
             Mobs[Mobs.Count-1].GetComponent<monster>().speed += SpeedAdd;
             CurrTime = Mobs[Mobs.Count-1].GetComponent<monster>().timeToNextSpawn;
         }
