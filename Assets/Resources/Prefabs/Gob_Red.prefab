@@ -120,10 +120,9 @@ MonoBehaviour:
   Hp: 2
   speed: 1
   target: -4
-  timeToNextSpawn: 2
+  timeToNextSpawn: 3
   IsDead: 0
   scoreDrop: 40
-  anim: {fileID: 9100000, guid: 76fff8d6e95dd6d4a867b09e31885c46, type: 2}
 --- !u!58 &2893915697480493520
 CircleCollider2D:
   m_ObjectHideFlags: 0

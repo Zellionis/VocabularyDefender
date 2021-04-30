@@ -90,13 +90,11 @@ public class GameManager : MonoBehaviour
         {
             if (currentWord.IsTraduction(inputField.text.Trim()))
             {
-                Debug.Log("True !");
                 player.Fire(monsterManager.Mobs);
                 player.combo += 1;
             }
             else
             {
-                Debug.Log("False !");
                 wrongWords.Add(currentWord);
                 player.combo = 0;
             }

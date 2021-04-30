@@ -117,13 +117,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1f2c8aa6087a094aaf4188681eea92c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hp: 7
+  Hp: 6
   speed: 0.6
   target: 0
-  timeToNextSpawn: 8
+  timeToNextSpawn: 10
   IsDead: 0
   scoreDrop: 150
-  anim: {fileID: 9100000, guid: 135356f64cbea8f4e8d9944ad01f0599, type: 2}
 --- !u!58 &7882266500318207230
 CircleCollider2D:
   m_ObjectHideFlags: 0
