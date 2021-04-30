@@ -68,6 +68,8 @@ public class Player : MonoBehaviour
     public void Damage(int _damage)
     {
         Hp -= _damage;
+        if (Hp < 0)
+            Hp = 0;
     }
 
     private void OnTriggerEnter2D(Collider2D other)

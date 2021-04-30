@@ -25,45 +25,64 @@ public class MonsterManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        int ran = Random.Range(0, Prefabs.Length);
-
-        if(CurrentN - Prefabs[ran].GetComponent<monster>().Hp < 0)
+        int ran;
+        if (CurrTime <= 0)
         {
-            while(CurrentN - Prefabs[ran].GetComponent<monster>().Hp < 0)
+            int percent = Random.Range(0, 100);
+
+
+            if (percent <= 80)
             {
-                ran--;
+                ran = Random.Range(0, 4);
             }
-        }
-
-        if (CurrTime <= 0 && CurrentN > 0)
-        {
-            CurrentN -= Prefabs[ran].GetComponent<monster>().Hp;
-            int SpawnRan = Random.Range(0, 3);
-            Mobs.Add(spawns[SpawnRan].spawn(Prefabs[ran], ran));
-            Mobs[Mobs.Count - 1].GetComponent<SpriteRenderer>().sortingOrder = SpawnRan + (ran > 3 ? 2:1);
-            Mobs[Mobs.Count-1].GetComponent<monster>().speed += SpeedAdd;
-            CurrTime = Mobs[Mobs.Count-1].GetComponent<monster>().timeToNextSpawn;
-        }
-
-        if (CurrentN == 0)
-        {
-            if (Wave < 4)
-                NumberWords += 10;
-            
-            else if (Wave < 6)
-                SpeedAdd += 0.25f;
-            
-            else if (Wave < 8)
-                NumberWords += 10;
-            
             else
-                SpeedAdd += 0.25f;
+            {
+                ran = Random.Range(4, 7);
+            }
 
-            CurrentN = NumberWords;
-            Wave++;
+
+
+
+            if (CurrentN - Prefabs[ran].GetComponent<monster>().Hp < 0)
+            {
+                while (CurrentN - Prefabs[ran].GetComponent<monster>().Hp < 0)
+                {
+                    ran--;
+                }
+            }
+
+
+            if (CurrentN > 0)
+            {
+                CurrentN -= Prefabs[ran].GetComponent<monster>().Hp;
+                int SpawnRan = Random.Range(0, 3);
+                Mobs.Add(spawns[SpawnRan].spawn(Prefabs[ran], ran));
+                Mobs[Mobs.Count - 1].GetComponent<SpriteRenderer>().sortingOrder = SpawnRan + (ran > 3 ? 2 : 1);
+                Mobs[Mobs.Count - 1].GetComponent<monster>().speed += SpeedAdd;
+                CurrTime = Mobs[Mobs.Count - 1].GetComponent<monster>().timeToNextSpawn;
+            }
+
+            if (CurrentN == 0)
+            {
+                if (Wave < 4)
+                    NumberWords += 10;
+
+                else if (Wave < 6)
+                    SpeedAdd += 0.25f;
+
+                else if (Wave < 8)
+                    NumberWords += 10;
+
+                else
+                    SpeedAdd += 0.25f;
+
+                CurrentN = NumberWords;
+                Wave++;
+            }
+
         }
-
         CurrTime -= Time.deltaTime;
+
     }
     
 }
